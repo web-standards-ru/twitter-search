@@ -3,6 +3,6 @@
     "secret": "KQ76nmoRtWB4DSSIET4rj21Ea9CS583H7kFeQYNC4U",
     "pollInterval": 15000,
     "defaultQuery": "#wstdays",
-    "includeRetweets": false
+    "port": 8080
 }
 
