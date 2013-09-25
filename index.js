@@ -1,3 +1,5 @@
+"use strict";
+
 var http = require('http');
 var redis = require('redis');
 var configParser = require('./lib/configParser');
@@ -6,7 +8,7 @@ var search = require('./lib/search');
 var redisClient = redis.createClient();
 var server = http.createServer();
 
-redisClient.select(1);
+redisClient.select(configParser.get('dbNum'));
 
 server.on("request", function(req, res) {
     if (req.url === '/favicon.ico') {
@@ -18,15 +20,10 @@ server.on("request", function(req, res) {
     });
 
     redisClient.lrange('tweets', 0, 20, function(err, data) {
-        res.write('[' + data.reverse().join(',') + ']');
+        res.write('[' + data.join(',') + ']');
         res.end();
     });
 });
 
-configParser.get('defaultQuery').then(function(query) {
-    search.run(query);
-});
-
-configParser.get('port').then(function(port) {
-    server.listen(port);
-});
+search.search(configParser.get('defaultQuery'));
+server.listen(configParser.get('port') || 8000);
