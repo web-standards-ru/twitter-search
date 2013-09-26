@@ -25,8 +25,37 @@ server.on("request", function(req, res) {
     });
 
     redisClient.lrange('tweets', 0, 20, function(err, data) {
-        var responseData = '[' + data.join(',') + ']';
+        var responseData;
+        var fields;
+        var result = data.map(function(elem) {
+            return JSON.parse(elem);
+        });
 
+        if ('fields' in query) {
+            fields = query.fields.split(',');
+            responseData = result.map(function(elem) {
+                var ret = {};
+
+                fields.forEach(function (field) {
+                    var fieldObj; 
+
+                    if(field.indexOf('.') === -1) {
+                        ret[field] = elem[field];
+                    } else {
+                        fieldObj = field.split('.');
+                        ret[fieldObj[0]] = ret[fieldObj[0]] || {};
+                        ret[fieldObj[0]][fieldObj[1]] = elem[fieldObj[0]][fieldObj[1]]
+                    }
+                });
+
+                return ret;
+            });
+        } else {
+            responseData = result;
+        }
+
+        responseData = JSON.stringify(responseData);
+        
         if ('callback' in query) {
             responseData = query.callback + '(' + responseData + ')';
         }
