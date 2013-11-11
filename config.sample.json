@@ -1,6 +1,8 @@
 {
-    "key": "TpykRLqIwgwpgvAZJhioN",
-    "secret": "KQ76nmoRtWB4DSSIET4rj21Ea9CS583H7kFeQYNC4U",
+    "consumer_key": "consumer key",
+    "consumer_secret": "consumer secret",
+    "token": "oauth token",
+    "token_secret": "token secret",
     "pollInterval": 15000,
     "defaultQuery": "#wstdays",
     "includeRetweets": false,
