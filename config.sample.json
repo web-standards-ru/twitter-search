@@ -1,6 +1,8 @@
 {
     "key": "TpykRLqIwgwpgvAZJhioN",
     "secret": "KQ76nmoRtWB4DSSIET4rj21Ea9CS583H7kFeQYNC4U",
+    "access_token_key": "GjHWbHi2R7C4C2podsc1X0zegzOOODGFE6SdwRV61",
+    "access_token_secret": "g7ulG22tJvSTGmMgASdPAeiB8k",
     "pollInterval": 15000,
     "defaultQuery": "#wstdays",
     "includeRetweets": false,
