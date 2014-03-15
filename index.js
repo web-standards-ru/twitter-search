@@ -5,6 +5,9 @@ var redis = require('redis');
 var configParser = require('./lib/configParser');
 var search = require('./lib/search');
 var url = require('url');
+var logging = require("./lib/logging");
+var logger = new logging.Logger(configParser.get("logging"));
+
 
 var redisClient = redis.createClient();
 var server = http.createServer();
@@ -66,4 +69,6 @@ server.on("request", function(req, res) {
 });
 
 search.search(configParser.get('defaultQuery'));
-server.listen(configParser.get('port') || 8000);
+server.listen(configParser.get('port') || 8000, function() {
+    logger.log("Server started at " + new Date(), "Server started");
+});

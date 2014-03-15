@@ -8,6 +8,15 @@
     "includeRetweets": false,
     "dbNum": 1,
     "port": 8080,
-    "retweet": false
+    "retweet": false,
+    "logging": {
+        "console": true,
+        "mail": {
+            "transport": "Sendmail",
+            "from": "twitterStream@site.tld",
+            "to": "admin@site.tld",
+            "subjectPrefix": "[Twitter Stream]"
+        }
+    }
 }
 
